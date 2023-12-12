@@ -9,7 +9,7 @@ namespace Domain.Configurations
     public class EmailConfiguration
     {
 
-        public string FromEmail { get; set; } 
+        public string FromEmail { get; set; }
         public string FromName { get; set; } = "troo-x";
         public string ForgotPasswordSubject { get; set; } = "ForgotPassword";
         public string ChangePasswordSubject { get; set; }
