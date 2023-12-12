@@ -9,14 +9,14 @@ namespace Domain.Configurations
     public class EmailConfiguration
     {
 
-        public string FromEmail { get; set; } = "akoredeayo007@gmail.com";
-        public string FromName { get; set; } = "troo-x";
-        public string ForgotPasswordSubject { get; set; } = "ForgotPassword";
+        public string FromEmail { get; set; }
+        public string FromName { get; set; }
+        public string ForgotPasswordSubject { get; set; } 
         public string ChangePasswordSubject { get; set; }
         public string ChangePincodeSubject { get; set; }
         public string ResetPasswordSubject { get; set; }
-        public string VerificationSubject { get; set; } = "Verification";
-        public string InvitationSubject { get; set; } = "Invitation";
+        public string VerificationSubject { get; set; } 
+        public string InvitationSubject { get; set; }
 
     }
 }
