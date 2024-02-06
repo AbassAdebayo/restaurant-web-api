@@ -94,16 +94,16 @@ namespace Application.Implementations.Modules.Employee.Services
             var token = _identityService.GenerateToken(employee, roles);
 
             //Send verification mail
-            var sent = await _mailService.SendInvitationMail(employee.Email, employee.Name, token, roles);
-            if (!sent)
-            {
-                _logger.LogWarning($"User created, but unable to Send an Invite to user with Email {employee.Email}");
-                return new BaseResponse
-                {
-                    Message = $"User created, but unable to Send an Invite to user with Email {employee.Email}",
-                    Status = false
-                };
-            }
+            //var sent = await _mailService.SendInvitationMail(employee.Email, employee.Name, token, roles);
+            //if (!sent)
+            //{
+            //    _logger.LogWarning($"User created, but unable to Send an Invite to user with Email {employee.Email}");
+            //    return new BaseResponse
+            //    {
+            //        Message = $"User created, but unable to Send an Invite to user with Email {employee.Email}",
+            //        Status = false
+            //    };
+            //}
 
             _logger.LogWarning($"User created successfully");
             return new BaseResponse

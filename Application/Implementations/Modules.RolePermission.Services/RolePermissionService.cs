@@ -115,7 +115,8 @@ namespace Application.Implementations.Modules.RolePermission.Services
                 rolePermissions.Add(new Domain.Domain.Modules.RolePermission.Entities.RolePermission
                 {
                     RoleId = role.Id,
-                    PermissionId = subPermission.PermissionId
+                    PermissionId = subPermission.PermissionId,
+                    SubPermissionId = subPermission.Id
                 });
             }
 
@@ -174,7 +175,8 @@ namespace Application.Implementations.Modules.RolePermission.Services
                 var clonedRolePermission = new Domain.Domain.Modules.RolePermission.Entities.RolePermission
                 {
                     RoleId = newRole.Id,
-                    PermissionId = originalRolePermission.PermissionId
+                    PermissionId = originalRolePermission.PermissionId,
+                    SubPermissionId = originalRolePermission.SubPermissionId,
                 };
 
                 await _rolePermissionsRepository.AddRolePermissionAsync(clonedRolePermission);

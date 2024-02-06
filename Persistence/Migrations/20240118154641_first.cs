@@ -544,30 +544,30 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("0b513db6-6ed1-44c5-9615-32f2d74da1e5"), "Cash Register" },
-                    { new Guid("1c349f74-1e47-4b6e-8b8f-e38fd7a029f7"), "Menu Settings" },
-                    { new Guid("a03871eb-adf8-4dc3-9497-ac7d2d162d4a"), "Kitchen Display System" },
-                    { new Guid("d2bf592c-5eb5-4d41-94c7-1134c70eef9e"), "Table Ordering" },
-                    { new Guid("e1be84dc-e197-463e-a8f0-5915423eb13a"), "Till" },
-                    { new Guid("fe5da079-9611-47b9-b06d-29222f6b6420"), "Tickets" }
+                    { new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8"), "Tickets" },
+                    { new Guid("88bbf4a1-3a48-496d-ad41-43ab930c1c3e"), "Menu Settings" },
+                    { new Guid("901f8ab3-a552-415b-8844-c5f31e4285fe"), "Cash Register" },
+                    { new Guid("abb4a95b-7b38-4920-b6cf-584975cb26c8"), "Table Ordering" },
+                    { new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2"), "Kitchen Display System" },
+                    { new Guid("dc75d111-d3a0-433a-b815-860eead0b275"), "Till" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "CreatedBy", "Description", "RoleName" },
-                values: new object[] { new Guid("708d384d-3f1e-493f-b083-6fa3a6eb3de9"), "Auto", "Owner", "SuperAdmin" });
+                values: new object[] { new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70"), "Auto", "Owner", "SuperAdmin" });
 
             migrationBuilder.InsertData(
                 table: "RolePermissions",
                 columns: new[] { "Id", "PermissionId", "RoleId" },
                 values: new object[,]
                 {
-                    { new Guid("0895856f-54d8-4578-82c4-c76a13468fca"), new Guid("e1be84dc-e197-463e-a8f0-5915423eb13a"), new Guid("708d384d-3f1e-493f-b083-6fa3a6eb3de9") },
-                    { new Guid("1e0d4aff-e109-4c6f-a36f-28c7fc6d50bc"), new Guid("fe5da079-9611-47b9-b06d-29222f6b6420"), new Guid("708d384d-3f1e-493f-b083-6fa3a6eb3de9") },
-                    { new Guid("2359bbc4-b941-4841-8137-d2ed6fe4d8d3"), new Guid("1c349f74-1e47-4b6e-8b8f-e38fd7a029f7"), new Guid("708d384d-3f1e-493f-b083-6fa3a6eb3de9") },
-                    { new Guid("66d20f75-cc4a-46c8-9243-becbd13d5ff7"), new Guid("0b513db6-6ed1-44c5-9615-32f2d74da1e5"), new Guid("708d384d-3f1e-493f-b083-6fa3a6eb3de9") },
-                    { new Guid("d64f37a2-5638-49d8-98bd-0522cf2b331c"), new Guid("a03871eb-adf8-4dc3-9497-ac7d2d162d4a"), new Guid("708d384d-3f1e-493f-b083-6fa3a6eb3de9") },
-                    { new Guid("de467fc3-7ede-442c-b066-54a7fb11270f"), new Guid("d2bf592c-5eb5-4d41-94c7-1134c70eef9e"), new Guid("708d384d-3f1e-493f-b083-6fa3a6eb3de9") }
+                    { new Guid("0eb45329-e6cc-4c0e-a72f-ca688e616f84"), new Guid("901f8ab3-a552-415b-8844-c5f31e4285fe"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") },
+                    { new Guid("19f47311-e732-44a3-bad2-201ff0d18ee7"), new Guid("dc75d111-d3a0-433a-b815-860eead0b275"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") },
+                    { new Guid("2d6f2536-f730-4b02-8844-50f2d1fa003e"), new Guid("abb4a95b-7b38-4920-b6cf-584975cb26c8"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") },
+                    { new Guid("34402c88-1b7b-4386-b965-cd3f154d5d37"), new Guid("88bbf4a1-3a48-496d-ad41-43ab930c1c3e"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") },
+                    { new Guid("66e4bad1-b700-4708-b13c-907a7c1d0ed7"), new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") },
+                    { new Guid("9bedf81e-e63c-4da0-8d8d-eb7d560846d1"), new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") }
                 });
 
             migrationBuilder.InsertData(
@@ -575,32 +575,32 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "Name", "PermissionId" },
                 values: new object[,]
                 {
-                    { new Guid("081320c9-5dd3-4055-b1f2-8efa99cce621"), "Ticket", new Guid("e1be84dc-e197-463e-a8f0-5915423eb13a") },
-                    { new Guid("1238c73d-4220-4b02-b8dd-8521aea26d48"), "Refunds", new Guid("e1be84dc-e197-463e-a8f0-5915423eb13a") },
-                    { new Guid("1a008bc7-e790-4e5c-bac9-35c61e877362"), "View Order", new Guid("a03871eb-adf8-4dc3-9497-ac7d2d162d4a") },
-                    { new Guid("32fb0f3e-54e0-4b33-bf83-15933164a47c"), "Edit Order Status", new Guid("a03871eb-adf8-4dc3-9497-ac7d2d162d4a") },
-                    { new Guid("38bb4e24-3a68-4842-8b84-da3552d6d780"), "Create Category", new Guid("1c349f74-1e47-4b6e-8b8f-e38fd7a029f7") },
-                    { new Guid("3faeec15-af12-4b54-b3f3-ada58bdee3a7"), "View All Tickets", new Guid("fe5da079-9611-47b9-b06d-29222f6b6420") },
-                    { new Guid("4514293e-b2f6-449f-997f-cc1cbd608d26"), "Discount", new Guid("e1be84dc-e197-463e-a8f0-5915423eb13a") },
-                    { new Guid("45feadf7-1a22-46dc-a726-8fde87fbc8c1"), "Mirror Cash Register Privileges", new Guid("d2bf592c-5eb5-4d41-94c7-1134c70eef9e") },
-                    { new Guid("468b229e-a308-450e-9516-d8c2e8fac1de"), "Hardware Integration", new Guid("0b513db6-6ed1-44c5-9615-32f2d74da1e5") },
-                    { new Guid("47745725-12fb-4c42-968f-e20bb35849c8"), "View Order Status", new Guid("a03871eb-adf8-4dc3-9497-ac7d2d162d4a") },
-                    { new Guid("4a886af6-06f7-4cba-b5e2-b48697b4ff24"), "Access Handheld Devices With Pin", new Guid("d2bf592c-5eb5-4d41-94c7-1134c70eef9e") },
-                    { new Guid("53e81f34-1630-43bb-a976-b5b94703eeb8"), "Add Item", new Guid("1c349f74-1e47-4b6e-8b8f-e38fd7a029f7") },
-                    { new Guid("629b1ae5-a3a8-41c6-ba8a-531ca9af9504"), "POS Integration", new Guid("0b513db6-6ed1-44c5-9615-32f2d74da1e5") },
-                    { new Guid("6c2fc122-3f6e-4934-b1bb-cd19230315e1"), "Cancel Or Void Order", new Guid("e1be84dc-e197-463e-a8f0-5915423eb13a") },
-                    { new Guid("788d02fc-b318-41db-9a48-9e09e3936226"), "EOD Balance Of Account", new Guid("e1be84dc-e197-463e-a8f0-5915423eb13a") },
-                    { new Guid("7ad67d89-2377-44e4-898f-54599cc6edfa"), "Create Menu", new Guid("1c349f74-1e47-4b6e-8b8f-e38fd7a029f7") },
-                    { new Guid("7f664624-c85e-4307-b8e1-33d710ea7951"), "Tips", new Guid("e1be84dc-e197-463e-a8f0-5915423eb13a") },
-                    { new Guid("8e65b992-45c8-4aa7-acf9-78b89947f6f5"), "Refund Ticket", new Guid("fe5da079-9611-47b9-b06d-29222f6b6420") },
-                    { new Guid("8fb175bf-6717-435c-89e6-824ab33bab7a"), "Order Chat", new Guid("a03871eb-adf8-4dc3-9497-ac7d2d162d4a") },
-                    { new Guid("b96c2e9c-d2d9-4f33-9827-907e1f0fa8a1"), "View Ticket Status", new Guid("fe5da079-9611-47b9-b06d-29222f6b6420") },
-                    { new Guid("cb858b45-8cdb-4bc8-b183-6f1c72dc447a"), "Inventory Management", new Guid("0b513db6-6ed1-44c5-9615-32f2d74da1e5") },
-                    { new Guid("cc35524e-f68f-450c-aebb-32acbfcf85a8"), "Sync To Cloud", new Guid("e1be84dc-e197-463e-a8f0-5915423eb13a") },
-                    { new Guid("d6cc6b7b-af56-48f6-90a3-2fd6b61b3335"), "Order Chat", new Guid("e1be84dc-e197-463e-a8f0-5915423eb13a") },
-                    { new Guid("e172f63e-a92f-423e-831a-14b313cfbb24"), "Order Management", new Guid("e1be84dc-e197-463e-a8f0-5915423eb13a") },
-                    { new Guid("f2eadb02-e660-404b-b595-51fe69466644"), "Fulfill Order", new Guid("a03871eb-adf8-4dc3-9497-ac7d2d162d4a") },
-                    { new Guid("ff500aba-b4d4-453a-ab68-4785d84a7223"), "Void Ticket Transactions", new Guid("fe5da079-9611-47b9-b06d-29222f6b6420") }
+                    { new Guid("153c16fc-55cf-46e3-b124-0d7273ba9c9a"), "Add Item", new Guid("88bbf4a1-3a48-496d-ad41-43ab930c1c3e") },
+                    { new Guid("33b0a1d1-2da6-468c-8772-02e23286221f"), "Edit Order Status", new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2") },
+                    { new Guid("340a9fc4-d96a-4abe-9dc2-f6dc11551b3b"), "Tips", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
+                    { new Guid("3929d13d-03b7-4c7c-a547-b345e1dd92a9"), "Access Handheld Devices With Pin", new Guid("abb4a95b-7b38-4920-b6cf-584975cb26c8") },
+                    { new Guid("4a300bc5-2fb7-4131-b019-e227d08849cd"), "Create Menu", new Guid("88bbf4a1-3a48-496d-ad41-43ab930c1c3e") },
+                    { new Guid("4d133fe8-799c-4bc8-a0e9-c71cdf6fbc3c"), "Discount", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
+                    { new Guid("535f0cf1-6110-4f94-9ed8-bfda8084d056"), "Cancel Or Void Order", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
+                    { new Guid("55f1c2dc-bea6-4558-b9e6-db7e026dea23"), "Order Chat", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
+                    { new Guid("607fcff5-d2d7-4311-91f4-e062c53e9cf2"), "Sync To Cloud", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
+                    { new Guid("637721a8-8c36-4ec6-8575-58caa9bcf38c"), "Refunds", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
+                    { new Guid("63e41f19-f911-4d23-a95e-721442823fd1"), "View Order", new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2") },
+                    { new Guid("64189302-5df1-415a-869c-8154df9d93cd"), "EOD Balance Of Account", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
+                    { new Guid("685d3591-e984-4fba-9b04-6f6975e74419"), "Order Management", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
+                    { new Guid("6d2d554a-cf6e-4eff-9fd4-beef65f6d921"), "View All Tickets", new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8") },
+                    { new Guid("7024b2fd-e5f0-4a64-9e69-0294a431d0ff"), "Inventory Management", new Guid("901f8ab3-a552-415b-8844-c5f31e4285fe") },
+                    { new Guid("709314ed-159d-4b77-9abf-75be001df594"), "Mirror Cash Register Privileges", new Guid("abb4a95b-7b38-4920-b6cf-584975cb26c8") },
+                    { new Guid("8d94b0c7-7060-4618-a481-cbb045ecd64b"), "Create Category", new Guid("88bbf4a1-3a48-496d-ad41-43ab930c1c3e") },
+                    { new Guid("9bda32bf-8c09-4c5d-ad53-fa45236c29a9"), "Order Chat", new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2") },
+                    { new Guid("a2bd1b6a-edf2-45d0-959d-b2d17dd9f176"), "Ticket", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
+                    { new Guid("a9bb756a-d8f0-4f69-b319-9aaff6d8b9f1"), "Fulfill Order", new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2") },
+                    { new Guid("adf254b6-16c2-432c-a4ee-31e296544f2d"), "Void Ticket Transactions", new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8") },
+                    { new Guid("cc97540d-df9a-4b4c-a734-885b844a2f5b"), "View Order Status", new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2") },
+                    { new Guid("dba87ec5-4019-4adf-85b2-20ad5061f29f"), "POS Integration", new Guid("901f8ab3-a552-415b-8844-c5f31e4285fe") },
+                    { new Guid("ee7fa12a-0b0b-4c76-b6be-c3b6e63c0424"), "Hardware Integration", new Guid("901f8ab3-a552-415b-8844-c5f31e4285fe") },
+                    { new Guid("ef43c373-9d49-4fe9-85e4-b5fde2a5a8b5"), "View Ticket Status", new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8") },
+                    { new Guid("ff2ee0f0-dd95-4e06-b8f5-a68cc506fcf2"), "Refund Ticket", new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8") }
                 });
 
             migrationBuilder.CreateIndex(
