@@ -87,13 +87,13 @@ namespace Persistence.Repositories.Modules.RolePermissions.Repository
             .Select(ur => ur.RoleId)
             .ToListAsync();
 
-            var hasPermissions = await _context.RolePermissions
+            var hasPermissionsAndSubPermissions = await _context.RolePermissions
                 .Where(rp => userRoleIds.Contains(rp.RoleId))
                 .AnyAsync(rp =>
-                    permissionNames.Contains(rp.Permission.Name));
-                    
+                    permissionNames.Contains(rp.Permission.Name) &&
+                     subPermissionNames.Contains(rp.SubPermission.Name));
 
-            return hasPermissions;
+            return hasPermissionsAndSubPermissions;
         }
 
         public async Task<bool> UserHasPermissionAsync(Guid userId, string permissionName)
