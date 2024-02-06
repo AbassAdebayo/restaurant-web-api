@@ -33,10 +33,12 @@ namespace Persistence.Repositories.Modules.RolePermissions.Repository
             return rolePermissions;
         }
 
-        public async Task<IList<Domain.Domain.Modules.RolePermission.Entities.RolePermission>> GetAllRolePermissionsAsync()
+        public async Task<IList<Domain.Domain.Modules.RolePermission.Entities.RolePermission>> GetAllRolesWithPermissionsAndSubPermissionsAsync()
         {
-            var rolePermissions = await _context.RolePermissions.Include(rp => rp.Permission)
-                .ThenInclude(pm => pm.SubPermissions)
+            var rolePermissions = await _context.RolePermissions
+                .Include(r => r.Role)
+                .Include(rp => rp.Permission)
+                .Include(pm => pm.SubPermission)
                   .AsNoTracking()
                   .ToListAsync();
             return rolePermissions;
