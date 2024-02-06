@@ -170,16 +170,16 @@ namespace Application.Implementations.Modules.Users.Services
             var token = _identityService.GenerateToken(user, roles);
 
             //Send verification mail
-            var sent = await _mailService.SendVerificationMail(user.Email, user.BusinessName,  token);
-            if (!sent)
-            {
-                _logger.LogWarning($"User created, but unable to Send Verification Email to user with Email {user.Email}");
-                return new BaseResponse
-                {
-                    Message = $"User created, but unable to Send Verification Email to user with Email {user.Email}",
-                    Status = false
-                };
-            }
+            //var sent = await _mailService.SendVerificationMail(user.Email, user.BusinessName,  token);
+            //if (!sent)
+            //{
+            //    _logger.LogWarning($"User created, but unable to Send Verification Email to user with Email {user.Email}");
+            //    return new BaseResponse
+            //    {
+            //        Message = $"User created, but unable to Send Verification Email to user with Email {user.Email}",
+            //        Status = false
+            //    };
+            //}
 
             _logger.LogWarning($"User created successfully");
             return new BaseResponse

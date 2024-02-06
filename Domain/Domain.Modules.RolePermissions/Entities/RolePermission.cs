@@ -16,6 +16,8 @@ namespace Domain.Domain.Modules.RolePermission.Entities
         public Role Role { get; set; }
         public Guid PermissionId { get; set; }
         public Permission? Permission { get; set; }
+        public Guid? SubPermissionId { get; set; }
+        public SubPermission? SubPermission { get; set; }
 
     }
 }

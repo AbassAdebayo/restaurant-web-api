@@ -90,8 +90,8 @@ namespace Persistence.Repositories.Modules.RolePermissions.Repository
             var hasPermissions = await _context.RolePermissions
                 .Where(rp => userRoleIds.Contains(rp.RoleId))
                 .AnyAsync(rp =>
-                    permissionNames.Contains(rp.Permission.Name) &&
-                    rp.Permission.SubPermissions.Any(sp => subPermissionNames.Contains(sp.Name)));
+                    permissionNames.Contains(rp.Permission.Name));
+                    
 
             return hasPermissions;
         }
