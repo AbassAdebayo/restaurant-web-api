@@ -18,6 +18,7 @@ namespace Application.DTOs
         public string CreatedBy { get; set; }
 
         public List<PermissionDto> Permissions { get; set; }
+        public List<SubPermissionDto> SubPermissions { get; set; }
 
         //[JsonIgnore]
         public ICollection<UserRole> UserRoles { get; set; } = new HashSet<UserRole>();
@@ -31,7 +32,7 @@ namespace Application.DTOs
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<SubPermissionDto> SubPermissions { get; set; }
+        
     }
 
     public class SubPermissionDto

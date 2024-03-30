@@ -80,7 +80,7 @@ namespace Application.Implementations.Modules.TableManagement.Services
             }
 
             // check if user is verified
-            if (!user.EmailConfirmed) throw new BadRequestException("User unverified");
+            //if (!user.EmailConfirmed) throw new BadRequestException("User unverified");
 
             if (user.UserType == Domain.Entities.Enums.UserType.Employee)
             {
