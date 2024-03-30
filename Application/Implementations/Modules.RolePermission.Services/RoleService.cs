@@ -128,14 +128,14 @@ namespace Application.Implementations.Modules.RolePermission.Services
                    
                         Id = rp.Permission.Id,
                         Name = rp.Permission.Name,
-                        SubPermissions = rp.Permission.SubPermissions.Select(sp => new SubPermissionDto
-                        {
-                            Id = sp.Id,
-                            Name = sp.Name,
+                        
+                }).ToList(),
+                SubPermissions = r.RolePermissions.Where(rp => rp.RoleId == r.Id)
+                .Select(sp => new SubPermissionDto
+                {
+                    Id = sp.SubPermission.Id,
+                    Name = sp.SubPermission.Name,
 
-                        }).ToList()
-                  
-                    
                 }).ToList()
             }).ToList();
 

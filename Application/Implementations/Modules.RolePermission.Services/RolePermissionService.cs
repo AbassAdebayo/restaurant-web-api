@@ -192,23 +192,33 @@ namespace Application.Implementations.Modules.RolePermission.Services
 
         }
 
-        public async Task<BaseResponse<IList<BaseResponse<Domain.Domain.Modules.RolePermission.Entities.RolePermission>>>> GetAllRolePermissionsAsync()
+        public async Task<BaseResponse<IList<RoleDto>>> GetAllRolesWithPermissionsAsync()
         {
-            var rolePermissions = await _rolePermissionsRepository.GetAllRolePermissionsAsync();
-            var responseRolePermissions = rolePermissions.Select(rolePermission => new BaseResponse<Domain.Domain.Modules.RolePermission.Entities.RolePermission>
+            var rolePermissions = await _rolePermissionsRepository.GetAllRolesWithPermissionsAsync();
+            var roleWithPermissions = rolePermissions.GroupBy(rp => rp.Role).Select(group => new RoleDto
             {
-                Message = $"Role Permissions fetched successfully",
-                Status = true,
-                Data = rolePermission
+                RoleId = group.Key.Id,
+                Name = group.Key.RoleName,
+                Permissions = group.Select(rp => new PermissionDto
+                {
+                    Id = rp.Permission.Id,
+                   Name = rp.Permission.Name,
+                   
+                }).ToList(),
+                SubPermissions = group.Select (sbp => new SubPermissionDto
+                {
+                    Id = sbp.SubPermission.Id,
+                    Name = sbp.SubPermission.Name
+
+                }).ToList()
+
             }).ToList();
 
-            
-
-            return new BaseResponse<IList<BaseResponse<Domain.Domain.Modules.RolePermission.Entities.RolePermission>>>
+            return new BaseResponse<IList<RoleDto>>
             {
                 Message = "Role Permissions fetched successfully",
                 Status = true,
-                Data = responseRolePermissions
+                Data = roleWithPermissions
             };
         }
 

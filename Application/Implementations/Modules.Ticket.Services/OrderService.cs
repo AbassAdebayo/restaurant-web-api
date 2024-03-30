@@ -65,7 +65,7 @@ namespace Application.Implementations.Modules.Ticket.Services
             }
 
             // check if user is confirmed
-            if (!user.EmailConfirmed) throw new BadRequestException("User unverified");
+            //if (!user.EmailConfirmed) throw new BadRequestException("User unverified");
 
             if (user.UserType == Domain.Entities.Enums.UserType.Employee)
             {

@@ -187,13 +187,15 @@ namespace Application.Implementations.Modules.Employee.Services
                     {
 
                         Id = rp.Permission.Id,
-                        Name = rp.Permission.Name,
-                        SubPermissions = rp.Permission.SubPermissions.Select(sp => new SubPermissionDto
-                        {
-                            Id = sp.Id,
-                            Name = sp.Name,
+                        Name = rp.Permission.Name
 
-                        }).ToList()
+                    }).ToList(),
+
+                    SubPermissions = r.Role.RolePermissions.Where(rp => rp.RoleId == r.RoleId)
+                    .Select(sp => new SubPermissionDto
+                    {
+                        Id = sp.SubPermission.Id,
+                        Name = sp.SubPermission.Name,
 
                     }).ToList()
                 }).ToList()

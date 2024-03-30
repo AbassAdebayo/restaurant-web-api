@@ -76,12 +76,12 @@ namespace WebApi.Controllers.RoleAndPermissionModule
             return response.Status ? Ok(response) : BadRequest(response);
         }
 
-        [HttpGet("get-all-role-permissions")]
+        [HttpGet("get-all-roles-with-permissions")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(BaseResponse))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationResultModel))]
         public async Task<IActionResult> GetAllRolePermissions()
         {
-            var response = await _rolePermissionService.GetAllRolePermissionsAsync();
+            var response = await _rolePermissionService.GetAllRolesWithPermissionsAsync();
             return response.Status ? Ok(response) : BadRequest(response);
         }
 
