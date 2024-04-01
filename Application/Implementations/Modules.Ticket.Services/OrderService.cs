@@ -166,7 +166,7 @@ namespace Application.Implementations.Modules.Ticket.Services
 
             Order order = new Order
             {
-                //TableId = tableId,
+                TabId = tabId,
                 OrderNumber = orderNumber,
                 WaiterName = user.UserType == Domain.Entities.Enums.UserType.SuperAdmin ? null : $"{user.Name} {user.LastName}",
                 CompanyName = user.UserType == Domain.Entities.Enums.UserType.SuperAdmin ? user.BusinessName : user.CreatedBy,
