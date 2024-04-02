@@ -146,5 +146,10 @@ namespace Persistence.Repositories.Modules.Tables.Repository
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public async Task<Table> GetTableByTabAsync(Tab tab)
+        {
+            return await _context.Tables.FirstOrDefaultAsync(t => t.Id == tab.TableId);
+        }
     }
 }

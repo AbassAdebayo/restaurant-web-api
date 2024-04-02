@@ -190,7 +190,8 @@ namespace Application.Implementations.Modules.Ticket.Services
                 };
             }
 
-            var getTable = await _tableRepository.GetTableByIdAsync(getTab.TableId);
+
+            var getTable = await _tableRepository.GetTableByTabAsync(getTab);
 
             getTable.SetTableToOpenedStatus();
             var updateTable = await _tableRepository.EditTableAsync(getTable);

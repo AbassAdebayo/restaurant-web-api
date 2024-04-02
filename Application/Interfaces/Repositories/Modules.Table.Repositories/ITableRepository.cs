@@ -1,4 +1,5 @@
 ﻿using Domain.Domain.Modules.MenuSettings;
+using Domain.Domain.Modules.Tables;
 using Domain.Wrapper;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Application.Interfaces.Repositories.Modules.Table.Repositories
     {
         public Task<Domain.Domain.Modules.Tables.Table> SaveTableAs(Domain.Domain.Modules.Tables.Table tables);
         public Task<Domain.Domain.Modules.Tables.Table> GetTableByIdAsync(Guid Id);
+        public Task<Domain.Domain.Modules.Tables.Table> GetTableByTabAsync(Tab tab);
         public Task<Domain.Domain.Modules.Tables.Table> GetTableByTableIdAsync(string tableId);
         Task<bool> DeleteTable(Domain.Domain.Modules.Tables.Table table);
         public Task<Domain.Domain.Modules.Tables.Table> EditTableAsync(Domain.Domain.Modules.Tables.Table table);
