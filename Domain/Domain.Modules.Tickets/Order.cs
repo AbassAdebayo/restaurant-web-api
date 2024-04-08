@@ -1,4 +1,5 @@
 ﻿using Domain.Contracts;
+using Domain.Domain.Modules.PaymentGateway;
 using Domain.Domain.Modules.Tables;
 using Domain.Domain.Modules.Users.Entities.Enums;
 using Domain.Entities;
@@ -30,6 +31,8 @@ namespace Domain.Domain.Modules.Order
         public OrderStatus Status { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Bill { get; set; }
+        [Column]
+        public Payment? Payment { get; set; }
 
         [Column(TypeName = "decimal(18, 2)")]
         public decimal? Discount { get; set; }

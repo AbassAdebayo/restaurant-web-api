@@ -286,31 +286,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RolePermissions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PermissionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RolePermissions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RolePermissions_Permissions_PermissionId",
-                        column: x => x.PermissionId,
-                        principalTable: "Permissions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RolePermissions_Roles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Roles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserRoles",
                 columns: table => new
                 {
@@ -388,6 +363,37 @@ namespace Persistence.Migrations
                         principalTable: "Tables",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RolePermissions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PermissionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SubPermissionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RolePermissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RolePermissions_Permissions_PermissionId",
+                        column: x => x.PermissionId,
+                        principalTable: "Permissions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RolePermissions_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RolePermissions_SubPermissions_SubPermissionId",
+                        column: x => x.SubPermissionId,
+                        principalTable: "SubPermissions",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -539,35 +545,60 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PaymentReferenceNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Payments_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Permissions",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8"), "Tickets" },
-                    { new Guid("88bbf4a1-3a48-496d-ad41-43ab930c1c3e"), "Menu Settings" },
-                    { new Guid("901f8ab3-a552-415b-8844-c5f31e4285fe"), "Cash Register" },
-                    { new Guid("abb4a95b-7b38-4920-b6cf-584975cb26c8"), "Table Ordering" },
-                    { new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2"), "Kitchen Display System" },
-                    { new Guid("dc75d111-d3a0-433a-b815-860eead0b275"), "Till" }
+                    { new Guid("683fac62-acd2-4652-8dcc-5a7090967e72"), "Table Ordering" },
+                    { new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31"), "Kitchen Display System" },
+                    { new Guid("a142b218-b5aa-43e3-a34b-4e70a85334a5"), "Cash Register" },
+                    { new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7"), "Tickets" },
+                    { new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b"), "Till" },
+                    { new Guid("f9f499aa-d4d4-49cd-b3e4-a60a778b93d1"), "Menu Settings" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "CreatedBy", "Description", "RoleName" },
-                values: new object[] { new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70"), "Auto", "Owner", "SuperAdmin" });
+                values: new object[] { new Guid("cb116949-ba67-410e-b532-c4e49294b949"), "Auto", "Owner", "SuperAdmin" });
 
             migrationBuilder.InsertData(
                 table: "RolePermissions",
-                columns: new[] { "Id", "PermissionId", "RoleId" },
+                columns: new[] { "Id", "PermissionId", "RoleId", "SubPermissionId" },
                 values: new object[,]
                 {
-                    { new Guid("0eb45329-e6cc-4c0e-a72f-ca688e616f84"), new Guid("901f8ab3-a552-415b-8844-c5f31e4285fe"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") },
-                    { new Guid("19f47311-e732-44a3-bad2-201ff0d18ee7"), new Guid("dc75d111-d3a0-433a-b815-860eead0b275"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") },
-                    { new Guid("2d6f2536-f730-4b02-8844-50f2d1fa003e"), new Guid("abb4a95b-7b38-4920-b6cf-584975cb26c8"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") },
-                    { new Guid("34402c88-1b7b-4386-b965-cd3f154d5d37"), new Guid("88bbf4a1-3a48-496d-ad41-43ab930c1c3e"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") },
-                    { new Guid("66e4bad1-b700-4708-b13c-907a7c1d0ed7"), new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") },
-                    { new Guid("9bedf81e-e63c-4da0-8d8d-eb7d560846d1"), new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8"), new Guid("4d0486f2-c7d0-4aff-941d-a9b34e6a1b70") }
+                    { new Guid("6ed2211c-0de6-4467-9a65-12b6c22ec035"), new Guid("f9f499aa-d4d4-49cd-b3e4-a60a778b93d1"), new Guid("cb116949-ba67-410e-b532-c4e49294b949"), null },
+                    { new Guid("97cd6f36-4903-4b97-89e6-63cb59bd3e6f"), new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31"), new Guid("cb116949-ba67-410e-b532-c4e49294b949"), null },
+                    { new Guid("9ea0f660-043c-4fad-b00b-5f01d948810b"), new Guid("683fac62-acd2-4652-8dcc-5a7090967e72"), new Guid("cb116949-ba67-410e-b532-c4e49294b949"), null },
+                    { new Guid("9f5c5309-f2ca-4943-8412-f44a31f53241"), new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7"), new Guid("cb116949-ba67-410e-b532-c4e49294b949"), null },
+                    { new Guid("b8e7bb4e-02d7-43cc-8bfc-852731fe0f29"), new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b"), new Guid("cb116949-ba67-410e-b532-c4e49294b949"), null },
+                    { new Guid("de11697e-31e2-4d59-aa05-9a13dab98577"), new Guid("a142b218-b5aa-43e3-a34b-4e70a85334a5"), new Guid("cb116949-ba67-410e-b532-c4e49294b949"), null }
                 });
 
             migrationBuilder.InsertData(
@@ -575,32 +606,32 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "Name", "PermissionId" },
                 values: new object[,]
                 {
-                    { new Guid("153c16fc-55cf-46e3-b124-0d7273ba9c9a"), "Add Item", new Guid("88bbf4a1-3a48-496d-ad41-43ab930c1c3e") },
-                    { new Guid("33b0a1d1-2da6-468c-8772-02e23286221f"), "Edit Order Status", new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2") },
-                    { new Guid("340a9fc4-d96a-4abe-9dc2-f6dc11551b3b"), "Tips", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
-                    { new Guid("3929d13d-03b7-4c7c-a547-b345e1dd92a9"), "Access Handheld Devices With Pin", new Guid("abb4a95b-7b38-4920-b6cf-584975cb26c8") },
-                    { new Guid("4a300bc5-2fb7-4131-b019-e227d08849cd"), "Create Menu", new Guid("88bbf4a1-3a48-496d-ad41-43ab930c1c3e") },
-                    { new Guid("4d133fe8-799c-4bc8-a0e9-c71cdf6fbc3c"), "Discount", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
-                    { new Guid("535f0cf1-6110-4f94-9ed8-bfda8084d056"), "Cancel Or Void Order", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
-                    { new Guid("55f1c2dc-bea6-4558-b9e6-db7e026dea23"), "Order Chat", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
-                    { new Guid("607fcff5-d2d7-4311-91f4-e062c53e9cf2"), "Sync To Cloud", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
-                    { new Guid("637721a8-8c36-4ec6-8575-58caa9bcf38c"), "Refunds", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
-                    { new Guid("63e41f19-f911-4d23-a95e-721442823fd1"), "View Order", new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2") },
-                    { new Guid("64189302-5df1-415a-869c-8154df9d93cd"), "EOD Balance Of Account", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
-                    { new Guid("685d3591-e984-4fba-9b04-6f6975e74419"), "Order Management", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
-                    { new Guid("6d2d554a-cf6e-4eff-9fd4-beef65f6d921"), "View All Tickets", new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8") },
-                    { new Guid("7024b2fd-e5f0-4a64-9e69-0294a431d0ff"), "Inventory Management", new Guid("901f8ab3-a552-415b-8844-c5f31e4285fe") },
-                    { new Guid("709314ed-159d-4b77-9abf-75be001df594"), "Mirror Cash Register Privileges", new Guid("abb4a95b-7b38-4920-b6cf-584975cb26c8") },
-                    { new Guid("8d94b0c7-7060-4618-a481-cbb045ecd64b"), "Create Category", new Guid("88bbf4a1-3a48-496d-ad41-43ab930c1c3e") },
-                    { new Guid("9bda32bf-8c09-4c5d-ad53-fa45236c29a9"), "Order Chat", new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2") },
-                    { new Guid("a2bd1b6a-edf2-45d0-959d-b2d17dd9f176"), "Ticket", new Guid("dc75d111-d3a0-433a-b815-860eead0b275") },
-                    { new Guid("a9bb756a-d8f0-4f69-b319-9aaff6d8b9f1"), "Fulfill Order", new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2") },
-                    { new Guid("adf254b6-16c2-432c-a4ee-31e296544f2d"), "Void Ticket Transactions", new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8") },
-                    { new Guid("cc97540d-df9a-4b4c-a734-885b844a2f5b"), "View Order Status", new Guid("d67b9497-dce0-48e5-8770-30b8e7517ac2") },
-                    { new Guid("dba87ec5-4019-4adf-85b2-20ad5061f29f"), "POS Integration", new Guid("901f8ab3-a552-415b-8844-c5f31e4285fe") },
-                    { new Guid("ee7fa12a-0b0b-4c76-b6be-c3b6e63c0424"), "Hardware Integration", new Guid("901f8ab3-a552-415b-8844-c5f31e4285fe") },
-                    { new Guid("ef43c373-9d49-4fe9-85e4-b5fde2a5a8b5"), "View Ticket Status", new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8") },
-                    { new Guid("ff2ee0f0-dd95-4e06-b8f5-a68cc506fcf2"), "Refund Ticket", new Guid("65ec4455-05bb-4012-a89f-91203f6c8bd8") }
+                    { new Guid("156cb5f6-fdb0-4b29-a9f8-fe52aaf2b97a"), "EOD Balance Of Account", new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b") },
+                    { new Guid("1e2f2276-bdb3-49f3-91c6-2edd27ec4ace"), "Add Item", new Guid("f9f499aa-d4d4-49cd-b3e4-a60a778b93d1") },
+                    { new Guid("20c31399-1427-4e0b-9900-6ab827185025"), "Inventory Management", new Guid("a142b218-b5aa-43e3-a34b-4e70a85334a5") },
+                    { new Guid("41ce2cf1-54fd-45b3-a2c0-d54a44ce3a64"), "Tips", new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b") },
+                    { new Guid("4fece294-363f-46a8-99bb-44320baab8c1"), "Edit Order Status", new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31") },
+                    { new Guid("58978779-860f-4644-a74c-f5a78d835c26"), "Void Ticket Transactions", new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7") },
+                    { new Guid("61e39a2a-0db1-43bb-adac-617e73504416"), "Ticket", new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b") },
+                    { new Guid("645291df-8563-4945-891f-4591bc572d59"), "Refunds", new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b") },
+                    { new Guid("6613bc9b-c152-4bac-9016-8b2870ec66b1"), "Create Menu", new Guid("f9f499aa-d4d4-49cd-b3e4-a60a778b93d1") },
+                    { new Guid("7f96d396-dc0b-446c-9030-83730c4cac14"), "View Ticket Status", new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7") },
+                    { new Guid("899fdc2b-4948-44f5-b0e1-8940870b4c3f"), "View All Tickets", new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7") },
+                    { new Guid("98364e85-765d-45e9-9cfa-df3c273dae8a"), "Access Handheld Devices With Pin", new Guid("683fac62-acd2-4652-8dcc-5a7090967e72") },
+                    { new Guid("9fffe096-8900-40b2-a6ca-3e5136d6947a"), "View Order", new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31") },
+                    { new Guid("a1c9ed38-a9b6-4717-86c2-2019d8584d42"), "Order Chat", new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31") },
+                    { new Guid("a451cfd0-787c-4817-80f1-28bf9d27e69f"), "View Order Status", new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31") },
+                    { new Guid("a5524284-075e-4412-b146-d1a2fb9cb20a"), "Create Category", new Guid("f9f499aa-d4d4-49cd-b3e4-a60a778b93d1") },
+                    { new Guid("c704ec3e-bc49-48e8-b94a-acf760398a9c"), "Mirror Cash Register Privileges", new Guid("683fac62-acd2-4652-8dcc-5a7090967e72") },
+                    { new Guid("c88b91c3-80ba-4e41-ad87-fcfc34d4255f"), "Cancel Or Void Order", new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b") },
+                    { new Guid("cbbf6797-2911-4f99-b9e6-f785317f0ea4"), "Sync To Cloud", new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b") },
+                    { new Guid("cce7598a-19a0-4743-973d-4c1df69adde7"), "Order Chat", new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b") },
+                    { new Guid("cdc36085-e200-4c2b-b807-27c569dbb1eb"), "Discount", new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b") },
+                    { new Guid("d1192028-5033-40ec-b871-c96cef9252ed"), "POS Integration", new Guid("a142b218-b5aa-43e3-a34b-4e70a85334a5") },
+                    { new Guid("d59a28d9-dbf8-42ae-a6b1-b7b0419edfcd"), "Fulfill Order", new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31") },
+                    { new Guid("dc9b433e-c7b1-4023-bf73-b87c4d53a7b9"), "Order Management", new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b") },
+                    { new Guid("dffbf553-4722-48f0-9179-e6589bd0bd89"), "Hardware Integration", new Guid("a142b218-b5aa-43e3-a34b-4e70a85334a5") },
+                    { new Guid("e4db0471-01a7-4a6f-82a4-a510ec589d74"), "Refund Ticket", new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7") }
                 });
 
             migrationBuilder.CreateIndex(
@@ -649,6 +680,12 @@ namespace Persistence.Migrations
                 column: "TabId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Payments_OrderId",
+                table: "Payments",
+                column: "OrderId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PriceOptions_PriceListEntryId",
                 table: "PriceOptions",
                 column: "PriceListEntryId");
@@ -667,6 +704,11 @@ namespace Persistence.Migrations
                 name: "IX_RolePermissions_RoleId",
                 table: "RolePermissions",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RolePermissions_SubPermissionId",
+                table: "RolePermissions",
+                column: "SubPermissionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubPermissions_PermissionId",
@@ -714,6 +756,9 @@ namespace Persistence.Migrations
                 name: "OrderItems");
 
             migrationBuilder.DropTable(
+                name: "Payments");
+
+            migrationBuilder.DropTable(
                 name: "PriceOptions");
 
             migrationBuilder.DropTable(
@@ -721,9 +766,6 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "RolePermissions");
-
-            migrationBuilder.DropTable(
-                name: "SubPermissions");
 
             migrationBuilder.DropTable(
                 name: "TimeSpecificPriceOptions");
@@ -738,7 +780,7 @@ namespace Persistence.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Permissions");
+                name: "SubPermissions");
 
             migrationBuilder.DropTable(
                 name: "MenuItems");
@@ -751,6 +793,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tabs");
+
+            migrationBuilder.DropTable(
+                name: "Permissions");
 
             migrationBuilder.DropTable(
                 name: "MenuGroups");

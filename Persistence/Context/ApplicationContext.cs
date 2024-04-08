@@ -1,5 +1,6 @@
 ﻿using Domain.Domain.Modules.MenuSettings;
 using Domain.Domain.Modules.Order;
+using Domain.Domain.Modules.PaymentGateway;
 using Domain.Domain.Modules.RolePermission.Entities;
 using Domain.Domain.Modules.Tables;
 using Domain.Domain.Modules.Users.Entities;
@@ -371,6 +372,7 @@ namespace Persistence.Context
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Guest> Guests { get; set; }
         public DbSet<Tab> Tabs { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
 
     }
