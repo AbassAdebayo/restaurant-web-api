@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240205101112_second")]
-    partial class second
+    [Migration("20240407092358_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -503,6 +503,45 @@ namespace Persistence.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("Domain.Domain.Modules.PaymentGateway.Payment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PaymentReferenceNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("Payments");
+                });
+
             modelBuilder.Entity("Domain.Domain.Modules.RolePermission.Entities.Permission", b =>
                 {
                     b.Property<Guid>("Id")
@@ -520,32 +559,32 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e8af0f98-cc43-46b2-99d3-5fe771867c2e"),
+                            Id = new Guid("f9f499aa-d4d4-49cd-b3e4-a60a778b93d1"),
                             Name = "Menu Settings"
                         },
                         new
                         {
-                            Id = new Guid("088a7ed8-e301-42ef-a3b1-ad44c72b3e3e"),
+                            Id = new Guid("a142b218-b5aa-43e3-a34b-4e70a85334a5"),
                             Name = "Cash Register"
                         },
                         new
                         {
-                            Id = new Guid("1f97b4c0-dc80-4c27-bb39-a7eb179c38a1"),
+                            Id = new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b"),
                             Name = "Till"
                         },
                         new
                         {
-                            Id = new Guid("4c07ccd7-da62-40be-af55-1df76c0e402a"),
+                            Id = new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7"),
                             Name = "Tickets"
                         },
                         new
                         {
-                            Id = new Guid("3cde5c36-4722-48d2-a136-52cfa5447ef6"),
+                            Id = new Guid("683fac62-acd2-4652-8dcc-5a7090967e72"),
                             Name = "Table Ordering"
                         },
                         new
                         {
-                            Id = new Guid("1b415ce8-b355-412a-89eb-fa198e1a9345"),
+                            Id = new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31"),
                             Name = "Kitchen Display System"
                         });
                 });
@@ -578,39 +617,39 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bbc62572-ed51-4087-89b4-409d84e4ca82"),
-                            PermissionId = new Guid("e8af0f98-cc43-46b2-99d3-5fe771867c2e"),
-                            RoleId = new Guid("73f9be25-1e41-4ed8-90c1-5c9a15bf0b21")
+                            Id = new Guid("6ed2211c-0de6-4467-9a65-12b6c22ec035"),
+                            PermissionId = new Guid("f9f499aa-d4d4-49cd-b3e4-a60a778b93d1"),
+                            RoleId = new Guid("cb116949-ba67-410e-b532-c4e49294b949")
                         },
                         new
                         {
-                            Id = new Guid("3f8481d5-d1ff-4ade-a80b-29ce59a6023b"),
-                            PermissionId = new Guid("088a7ed8-e301-42ef-a3b1-ad44c72b3e3e"),
-                            RoleId = new Guid("73f9be25-1e41-4ed8-90c1-5c9a15bf0b21")
+                            Id = new Guid("de11697e-31e2-4d59-aa05-9a13dab98577"),
+                            PermissionId = new Guid("a142b218-b5aa-43e3-a34b-4e70a85334a5"),
+                            RoleId = new Guid("cb116949-ba67-410e-b532-c4e49294b949")
                         },
                         new
                         {
-                            Id = new Guid("eeedb051-a3ff-46f0-89d3-862b78ff90f3"),
-                            PermissionId = new Guid("1f97b4c0-dc80-4c27-bb39-a7eb179c38a1"),
-                            RoleId = new Guid("73f9be25-1e41-4ed8-90c1-5c9a15bf0b21")
+                            Id = new Guid("b8e7bb4e-02d7-43cc-8bfc-852731fe0f29"),
+                            PermissionId = new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b"),
+                            RoleId = new Guid("cb116949-ba67-410e-b532-c4e49294b949")
                         },
                         new
                         {
-                            Id = new Guid("bc5bc554-96bc-4751-bd12-232af01c1f1f"),
-                            PermissionId = new Guid("4c07ccd7-da62-40be-af55-1df76c0e402a"),
-                            RoleId = new Guid("73f9be25-1e41-4ed8-90c1-5c9a15bf0b21")
+                            Id = new Guid("9f5c5309-f2ca-4943-8412-f44a31f53241"),
+                            PermissionId = new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7"),
+                            RoleId = new Guid("cb116949-ba67-410e-b532-c4e49294b949")
                         },
                         new
                         {
-                            Id = new Guid("98e44d46-0ea8-493d-a2ff-606172c3b8be"),
-                            PermissionId = new Guid("3cde5c36-4722-48d2-a136-52cfa5447ef6"),
-                            RoleId = new Guid("73f9be25-1e41-4ed8-90c1-5c9a15bf0b21")
+                            Id = new Guid("9ea0f660-043c-4fad-b00b-5f01d948810b"),
+                            PermissionId = new Guid("683fac62-acd2-4652-8dcc-5a7090967e72"),
+                            RoleId = new Guid("cb116949-ba67-410e-b532-c4e49294b949")
                         },
                         new
                         {
-                            Id = new Guid("0d635805-1298-435d-93eb-5bb0c8164a4d"),
-                            PermissionId = new Guid("1b415ce8-b355-412a-89eb-fa198e1a9345"),
-                            RoleId = new Guid("73f9be25-1e41-4ed8-90c1-5c9a15bf0b21")
+                            Id = new Guid("97cd6f36-4903-4b97-89e6-63cb59bd3e6f"),
+                            PermissionId = new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31"),
+                            RoleId = new Guid("cb116949-ba67-410e-b532-c4e49294b949")
                         });
                 });
 
@@ -636,159 +675,159 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6ad57654-0dee-4a93-86df-43658016a03a"),
+                            Id = new Guid("a5524284-075e-4412-b146-d1a2fb9cb20a"),
                             Name = "Create Category",
-                            PermissionId = new Guid("e8af0f98-cc43-46b2-99d3-5fe771867c2e")
+                            PermissionId = new Guid("f9f499aa-d4d4-49cd-b3e4-a60a778b93d1")
                         },
                         new
                         {
-                            Id = new Guid("4485f558-2427-467d-97ab-334acd7f316a"),
+                            Id = new Guid("6613bc9b-c152-4bac-9016-8b2870ec66b1"),
                             Name = "Create Menu",
-                            PermissionId = new Guid("e8af0f98-cc43-46b2-99d3-5fe771867c2e")
+                            PermissionId = new Guid("f9f499aa-d4d4-49cd-b3e4-a60a778b93d1")
                         },
                         new
                         {
-                            Id = new Guid("d438832f-3095-4407-b49a-d68315177da7"),
+                            Id = new Guid("1e2f2276-bdb3-49f3-91c6-2edd27ec4ace"),
                             Name = "Add Item",
-                            PermissionId = new Guid("e8af0f98-cc43-46b2-99d3-5fe771867c2e")
+                            PermissionId = new Guid("f9f499aa-d4d4-49cd-b3e4-a60a778b93d1")
                         },
                         new
                         {
-                            Id = new Guid("d2d3a010-6c95-48e1-89db-50d5296ea235"),
+                            Id = new Guid("20c31399-1427-4e0b-9900-6ab827185025"),
                             Name = "Inventory Management",
-                            PermissionId = new Guid("088a7ed8-e301-42ef-a3b1-ad44c72b3e3e")
+                            PermissionId = new Guid("a142b218-b5aa-43e3-a34b-4e70a85334a5")
                         },
                         new
                         {
-                            Id = new Guid("49da926e-bb1d-4490-9055-9fe85a487362"),
+                            Id = new Guid("d1192028-5033-40ec-b871-c96cef9252ed"),
                             Name = "POS Integration",
-                            PermissionId = new Guid("088a7ed8-e301-42ef-a3b1-ad44c72b3e3e")
+                            PermissionId = new Guid("a142b218-b5aa-43e3-a34b-4e70a85334a5")
                         },
                         new
                         {
-                            Id = new Guid("11f411bf-b364-422f-8774-63255204974a"),
+                            Id = new Guid("dffbf553-4722-48f0-9179-e6589bd0bd89"),
                             Name = "Hardware Integration",
-                            PermissionId = new Guid("088a7ed8-e301-42ef-a3b1-ad44c72b3e3e")
+                            PermissionId = new Guid("a142b218-b5aa-43e3-a34b-4e70a85334a5")
                         },
                         new
                         {
-                            Id = new Guid("499f0967-79c7-432b-badb-6e738bba91a3"),
+                            Id = new Guid("dc9b433e-c7b1-4023-bf73-b87c4d53a7b9"),
                             Name = "Order Management",
-                            PermissionId = new Guid("1f97b4c0-dc80-4c27-bb39-a7eb179c38a1")
+                            PermissionId = new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b")
                         },
                         new
                         {
-                            Id = new Guid("16db0e75-de8e-4c06-a8f8-2e61ae459a9e"),
+                            Id = new Guid("61e39a2a-0db1-43bb-adac-617e73504416"),
                             Name = "Ticket",
-                            PermissionId = new Guid("1f97b4c0-dc80-4c27-bb39-a7eb179c38a1")
+                            PermissionId = new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b")
                         },
                         new
                         {
-                            Id = new Guid("36cd63a3-6125-46b6-8a2c-8e50ac435783"),
+                            Id = new Guid("cdc36085-e200-4c2b-b807-27c569dbb1eb"),
                             Name = "Discount",
-                            PermissionId = new Guid("1f97b4c0-dc80-4c27-bb39-a7eb179c38a1")
+                            PermissionId = new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b")
                         },
                         new
                         {
-                            Id = new Guid("eea378bb-765b-4373-8579-0a025421ea7d"),
+                            Id = new Guid("645291df-8563-4945-891f-4591bc572d59"),
                             Name = "Refunds",
-                            PermissionId = new Guid("1f97b4c0-dc80-4c27-bb39-a7eb179c38a1")
+                            PermissionId = new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b")
                         },
                         new
                         {
-                            Id = new Guid("75334307-f5ae-4db1-8f3b-99b9ed26f217"),
+                            Id = new Guid("c88b91c3-80ba-4e41-ad87-fcfc34d4255f"),
                             Name = "Cancel Or Void Order",
-                            PermissionId = new Guid("1f97b4c0-dc80-4c27-bb39-a7eb179c38a1")
+                            PermissionId = new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b")
                         },
                         new
                         {
-                            Id = new Guid("e2e0e295-21f3-46e2-8a0e-1568cbaf8f6d"),
+                            Id = new Guid("41ce2cf1-54fd-45b3-a2c0-d54a44ce3a64"),
                             Name = "Tips",
-                            PermissionId = new Guid("1f97b4c0-dc80-4c27-bb39-a7eb179c38a1")
+                            PermissionId = new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b")
                         },
                         new
                         {
-                            Id = new Guid("28a9e0e1-a6f5-4c9f-9edf-3c1914e4073a"),
+                            Id = new Guid("156cb5f6-fdb0-4b29-a9f8-fe52aaf2b97a"),
                             Name = "EOD Balance Of Account",
-                            PermissionId = new Guid("1f97b4c0-dc80-4c27-bb39-a7eb179c38a1")
+                            PermissionId = new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b")
                         },
                         new
                         {
-                            Id = new Guid("9b32c784-a4e5-413b-984e-524a9fa4dd6b"),
+                            Id = new Guid("cbbf6797-2911-4f99-b9e6-f785317f0ea4"),
                             Name = "Sync To Cloud",
-                            PermissionId = new Guid("1f97b4c0-dc80-4c27-bb39-a7eb179c38a1")
+                            PermissionId = new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b")
                         },
                         new
                         {
-                            Id = new Guid("f523e2c1-7d27-42b2-979f-9df6ee40fef9"),
+                            Id = new Guid("cce7598a-19a0-4743-973d-4c1df69adde7"),
                             Name = "Order Chat",
-                            PermissionId = new Guid("1f97b4c0-dc80-4c27-bb39-a7eb179c38a1")
+                            PermissionId = new Guid("f11e1aec-efe2-401d-9715-6bba98b1313b")
                         },
                         new
                         {
-                            Id = new Guid("c7b1e46e-c1d0-4983-91e1-c0ff5fdb7356"),
+                            Id = new Guid("899fdc2b-4948-44f5-b0e1-8940870b4c3f"),
                             Name = "View All Tickets",
-                            PermissionId = new Guid("4c07ccd7-da62-40be-af55-1df76c0e402a")
+                            PermissionId = new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7")
                         },
                         new
                         {
-                            Id = new Guid("eec9789c-c410-440b-813c-783775e4ce37"),
+                            Id = new Guid("7f96d396-dc0b-446c-9030-83730c4cac14"),
                             Name = "View Ticket Status",
-                            PermissionId = new Guid("4c07ccd7-da62-40be-af55-1df76c0e402a")
+                            PermissionId = new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7")
                         },
                         new
                         {
-                            Id = new Guid("8f9f0e4e-ecf0-40f4-bd16-23c1f4445988"),
+                            Id = new Guid("58978779-860f-4644-a74c-f5a78d835c26"),
                             Name = "Void Ticket Transactions",
-                            PermissionId = new Guid("4c07ccd7-da62-40be-af55-1df76c0e402a")
+                            PermissionId = new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7")
                         },
                         new
                         {
-                            Id = new Guid("5453f0bc-48a2-47ad-b347-1f29bb75e291"),
+                            Id = new Guid("e4db0471-01a7-4a6f-82a4-a510ec589d74"),
                             Name = "Refund Ticket",
-                            PermissionId = new Guid("4c07ccd7-da62-40be-af55-1df76c0e402a")
+                            PermissionId = new Guid("dd5b567a-2c29-4fb2-b77e-bf7bb792b5c7")
                         },
                         new
                         {
-                            Id = new Guid("c12811c0-693c-417e-8e8f-8575f184a89f"),
+                            Id = new Guid("98364e85-765d-45e9-9cfa-df3c273dae8a"),
                             Name = "Access Handheld Devices With Pin",
-                            PermissionId = new Guid("3cde5c36-4722-48d2-a136-52cfa5447ef6")
+                            PermissionId = new Guid("683fac62-acd2-4652-8dcc-5a7090967e72")
                         },
                         new
                         {
-                            Id = new Guid("56362818-0726-4c80-b8fa-da1c2f869665"),
+                            Id = new Guid("c704ec3e-bc49-48e8-b94a-acf760398a9c"),
                             Name = "Mirror Cash Register Privileges",
-                            PermissionId = new Guid("3cde5c36-4722-48d2-a136-52cfa5447ef6")
+                            PermissionId = new Guid("683fac62-acd2-4652-8dcc-5a7090967e72")
                         },
                         new
                         {
-                            Id = new Guid("23ddd78b-34fa-4400-98a0-2390522c619e"),
+                            Id = new Guid("9fffe096-8900-40b2-a6ca-3e5136d6947a"),
                             Name = "View Order",
-                            PermissionId = new Guid("1b415ce8-b355-412a-89eb-fa198e1a9345")
+                            PermissionId = new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31")
                         },
                         new
                         {
-                            Id = new Guid("f8cc6d11-82a5-49b5-a9a6-65fd3d26b237"),
+                            Id = new Guid("d59a28d9-dbf8-42ae-a6b1-b7b0419edfcd"),
                             Name = "Fulfill Order",
-                            PermissionId = new Guid("1b415ce8-b355-412a-89eb-fa198e1a9345")
+                            PermissionId = new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31")
                         },
                         new
                         {
-                            Id = new Guid("0f6ae32e-f61a-42c1-92db-5203599f7f1a"),
+                            Id = new Guid("a451cfd0-787c-4817-80f1-28bf9d27e69f"),
                             Name = "View Order Status",
-                            PermissionId = new Guid("1b415ce8-b355-412a-89eb-fa198e1a9345")
+                            PermissionId = new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31")
                         },
                         new
                         {
-                            Id = new Guid("8aaa80df-bc18-47c8-b644-c1e2671d07e5"),
+                            Id = new Guid("4fece294-363f-46a8-99bb-44320baab8c1"),
                             Name = "Edit Order Status",
-                            PermissionId = new Guid("1b415ce8-b355-412a-89eb-fa198e1a9345")
+                            PermissionId = new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31")
                         },
                         new
                         {
-                            Id = new Guid("c6edf066-9018-4eab-a1b9-f44a8f0cc0c4"),
+                            Id = new Guid("a1c9ed38-a9b6-4717-86c2-2019d8584d42"),
                             Name = "Order Chat",
-                            PermissionId = new Guid("1b415ce8-b355-412a-89eb-fa198e1a9345")
+                            PermissionId = new Guid("6f63571f-d12d-49ab-b312-cf418d9bcc31")
                         });
                 });
 
@@ -1088,7 +1127,7 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("73f9be25-1e41-4ed8-90c1-5c9a15bf0b21"),
+                            Id = new Guid("cb116949-ba67-410e-b532-c4e49294b949"),
                             CreatedBy = "Auto",
                             Description = "Owner",
                             RoleName = "SuperAdmin"
@@ -1252,6 +1291,17 @@ namespace Persistence.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("Domain.Domain.Modules.PaymentGateway.Payment", b =>
+                {
+                    b.HasOne("Domain.Domain.Modules.Order.Order", "Order")
+                        .WithOne("Payment")
+                        .HasForeignKey("Domain.Domain.Modules.PaymentGateway.Payment", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Domain.Domain.Modules.RolePermission.Entities.RolePermission", b =>
                 {
                     b.HasOne("Domain.Domain.Modules.RolePermission.Entities.Permission", "Permission")
@@ -1374,6 +1424,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Domain.Modules.Order.Order", b =>
                 {
                     b.Navigation("OrderItems");
+
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("Domain.Domain.Modules.RolePermission.Entities.Permission", b =>
