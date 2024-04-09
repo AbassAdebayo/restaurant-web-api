@@ -15,9 +15,10 @@ namespace Domain.Domain.Modules.PaymentGateway
         [Column]
         public string? CustomerName { get; set; }
         [Column]
+        public string? BusinessName { get; set;}
+        [Column]
         public Guid OrderId { get; set; }
         [Column]
         public Domain.Modules.Order.Order Order { get; set; }
-        
-    }
-}
+ 
+}   }
