@@ -7,6 +7,8 @@
     <UserSecretsId>c83e7ceb-0cd7-467a-9816-5a1ba7fdefb6</UserSecretsId>
   </PropertyGroup>
 
+  
+
 	<ItemGroup>
 		<PackageReference Include="FluentAssertions" Version="6.7.0" />
 		<PackageReference Include="Mailchimp.NetCore" Version="1.0.0" />
