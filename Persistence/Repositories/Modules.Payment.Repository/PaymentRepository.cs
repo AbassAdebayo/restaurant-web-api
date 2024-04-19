@@ -18,6 +18,13 @@ namespace Persistence.Repositories.Modules.Payment.Repository
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        public async Task<Domain.Domain.Modules.PaymentGateway.Payment> CreatePayment(Domain.Domain.Modules.PaymentGateway.Payment payment)
+        {
+            await _context.AddAsync(payment);
+            await _context.SaveChangesAsync();
+            return payment;
+
+        }
 
         public async Task<IEnumerable<Domain.Domain.Modules.PaymentGateway.Payment>> GetAllPaymentsByBusinessNameAsync(string businessName)
         {
