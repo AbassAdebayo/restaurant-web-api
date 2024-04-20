@@ -13,10 +13,12 @@ using Application.Interfaces.Modules.RolePermission.Repository;
 using Application.Interfaces.Modules.RolesAndPermissions.Service;
 using Application.Interfaces.Modules.Users.IService;
 using Application.Interfaces.Repositories.Modules.MenuSettings.Repositories;
+using Application.Interfaces.Repositories.Modules.Payment.Repository;
 using Application.Interfaces.Repositories.Modules.RolePermission.Repository;
 using Application.Interfaces.Repositories.Modules.Table.Repositories;
 using Application.Interfaces.Repositories.Modules.Ticket.Repositories;
 using Application.Interfaces.Repositories.Modules.Users.IRepository;
+using Application.Interfaces.Services.Modules.Payment.Service;
 using Application.Interfaces.Services.Modules.TableManagement.Services;
 using Application.Interfaces.Services.Modules.Ticket.Services;
 using Domain.Domain.Modules.RolePermission.Entities;
@@ -30,9 +32,11 @@ using Persistence.Context;
 using Persistence.Identity;
 using Persistence.MailService;
 using Persistence.Messaging;
+using Persistence.PaymentGateway;
 using Persistence.Repositories.MenuRepositories;
 using Persistence.Repositories.MenuSettingsRepositories;
 using Persistence.Repositories.Modules.Employees.Repository;
+using Persistence.Repositories.Modules.Payment.Repository;
 using Persistence.Repositories.Modules.RolePermission.Repository;
 using Persistence.Repositories.Modules.RolePermissions.Repository;
 using Persistence.Repositories.Modules.Tables.Repository;
@@ -51,7 +55,7 @@ namespace Persistence.IOC.Extensions
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             return services
-                
+
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<IRolePermissionService, RolePermissionService>()
                 .AddScoped<IRoleService, RoleService>()
@@ -70,7 +74,8 @@ namespace Persistence.IOC.Extensions
                 .AddScoped<ITabService, TabService>()
                 .AddScoped<IMailSender, MailSender>()
                 .AddScoped<IMailService, MailingService>()
-                .AddScoped<IRazorEngine, RazorEngine>();
+                .AddScoped<IRazorEngine, RazorEngine>()
+                .AddScoped<IPaymentService, PaymentService>();
 
 
         }
@@ -93,7 +98,8 @@ namespace Persistence.IOC.Extensions
             .AddScoped<ITableRepository, TableRepository>()
             .AddScoped<IOrderRepository, OrderRepository>()
             .AddScoped<IGuestRepository, GuestRepository>()
-            .AddScoped<ITabRepository, TabRepository>();
+            .AddScoped<ITabRepository, TabRepository>()
+            .AddScoped<IPaymentRepository, PaymentRepository>();
 
 
 
